@@ -31,7 +31,7 @@ const AppointmentSidebar = () => {
         setIsSubmitting(true);
 
         try {
-            const res = await fetch("http://localhost:8000/appointment", {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/appointment`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

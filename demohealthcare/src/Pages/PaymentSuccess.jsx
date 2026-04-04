@@ -26,7 +26,7 @@ const PaymentSuccess = () => {
                 }
 
                 console.log("Fetching verification for TID:", tid);
-                const response = await fetch(`http://localhost:8000/verify-payment?transaction_id=${tid}&user_id=${user_id}`);
+                const response = await fetch(`${import.meta.env.VITE_API_URL}/verify-payment?transaction_id=${tid}&user_id=${user_id}`);
                 
                 const data = await response.json();
                 console.log("Verification response:", data);

@@ -36,7 +36,7 @@ const Dashboard = ({ setIsAuthenticated }) => {
 
   const handleLogout = async () => {
     try {
-      const res = await fetch("http://localhost:8000/logout", {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/logout`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -66,7 +66,7 @@ const Dashboard = ({ setIsAuthenticated }) => {
     const userId = localStorage.getItem("healthcare_user_id");
     if (!userId) return;
     try {
-      const res = await fetch(`http://localhost:8000/dashboard_data/${userId}`);
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/dashboard_data/${userId}`);
       if (res.ok) {
         const data = await res.json();
         setTotalAppointments(data.stats.total_appointments || 0);
@@ -87,7 +87,7 @@ const Dashboard = ({ setIsAuthenticated }) => {
 
   const handlenewappointment = async () => {
     try {
-      const res = await fetch("http://localhost:8000/new_appointment", {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/new_appointment`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

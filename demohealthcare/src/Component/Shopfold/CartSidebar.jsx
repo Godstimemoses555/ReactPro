@@ -40,7 +40,7 @@ const CartSidebar = () => {
         }
 
         try {
-            const response = await fetch("http://localhost:8000/Paymentgateway", {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/Paymentgateway`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

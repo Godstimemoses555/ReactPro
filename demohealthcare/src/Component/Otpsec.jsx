@@ -22,7 +22,7 @@ const Otpsec = ({ setIsAuthenticated }) => {
         }
 
         try {
-            const response = await fetch("http://localhost:8000/verify_otp", {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/verify_otp`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
