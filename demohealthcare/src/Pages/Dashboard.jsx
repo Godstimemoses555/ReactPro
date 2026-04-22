@@ -17,6 +17,7 @@ import {
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import { fetchWithAuth } from '../utils/fetchWithAuth';
 
 const Dashboard = ({ setIsAuthenticated }) => {
   const navigate = useNavigate();
@@ -36,7 +37,7 @@ const Dashboard = ({ setIsAuthenticated }) => {
 
   const handleLogout = async () => {
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/logout`, {
+      const res = await fetchWithAuth(`${import.meta.env.VITE_API_URL}/logout`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -66,7 +67,7 @@ const Dashboard = ({ setIsAuthenticated }) => {
     const userId = localStorage.getItem("healthcare_user_id");
     if (!userId) return;
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/dashboard_data/${userId}`);
+      const res = await fetchWithAuth(`${import.meta.env.VITE_API_URL}/dashboard_data/${userId}`);
       if (res.ok) {
         const data = await res.json();
         setTotalAppointments(data.stats.total_appointments || 0);
@@ -87,7 +88,7 @@ const Dashboard = ({ setIsAuthenticated }) => {
 
   const handlenewappointment = async () => {
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/new_appointment`, {
+      const res = await fetchWithAuth(`${import.meta.env.VITE_API_URL}/new_appointment`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

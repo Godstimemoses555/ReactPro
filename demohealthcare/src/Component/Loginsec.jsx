@@ -40,6 +40,8 @@ const Loginsec = () => {
                 // Persist userId for future use (like checkout)
                 localStorage.setItem("healthcare_user_id", data.user_id);
                 localStorage.setItem("healthcare_user_email", email);
+                localStorage.setItem("access_token", data.access_token);
+                localStorage.setItem("refresh_token", data.refresh_token)
                 // Navigate to Otp page
                 navigate("/Otp", { state: { userId: data.user_id } });
             } else {
