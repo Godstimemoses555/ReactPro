@@ -18,10 +18,13 @@ import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { fetchWithAuth } from '../utils/fetchWithAuth';
+import useAppointmentStore from '../store/useAppointmentStore';
 
 const Dashboard = ({ setIsAuthenticated }) => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('Overview');
+  const refreshTrigger = useAppointmentStore((state) => state.refreshTrigger);
+  const triggerRefresh = useAppointmentStore((state) => state.triggerRefresh);
   const userEmail = localStorage.getItem("healthcare_user_email") || "user@example.com";
   const userName = userEmail.split('@')[0];
 
@@ -84,7 +87,7 @@ const Dashboard = ({ setIsAuthenticated }) => {
 
   useEffect(() => {
     fetchDashboardData();
-  }, []);
+  }, [refreshTrigger]);
 
   const handlenewappointment = async () => {
     try {
@@ -101,6 +104,7 @@ const Dashboard = ({ setIsAuthenticated }) => {
       const data = await res.json();
       console.log("new_appointment:", data)
       setNewAppointment(data.new_appointment);
+      triggerRefresh();
       alert("Success! Your new appointment request has been recorded.");
     } catch (err) {
       console.error(err);
@@ -109,9 +113,9 @@ const Dashboard = ({ setIsAuthenticated }) => {
 
   const statCards = [
     { title: 'Total Appointments', value: totalAppointments, icon: Calendar, color: 'text-blue-600', bg: 'bg-blue-100' },
+    { title: 'Pending', value: appointments.filter(a => a.status !== 'Confirmed').length, icon: Clock, color: 'text-amber-600', bg: 'bg-amber-100' },
     { title: 'Upcoming Tests', value: upcomingTests, icon: Activity, color: 'text-emerald-600', bg: 'bg-emerald-100' },
     { title: 'Prescriptions', value: prescriptions, icon: ShieldCheck, color: 'text-purple-600', bg: 'bg-purple-100' },
-    { title: 'Reward Points', value: reward, icon: TrendingUp, color: 'text-amber-600', bg: 'bg-amber-100' },
   ];
 
 

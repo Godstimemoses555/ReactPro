@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { X, Calendar, Clock, User, Mail, Phone, FileText, ChevronRight, ChevronDown, Activity } from 'lucide-react';
 import useAppointmentStore from '../../store/useAppointmentStore';
+import { fetchWithAuth } from '../../utils/fetchWithAuth';
 
 const AppointmentSidebar = () => {
     const isAppointmentOpen = useAppointmentStore((state) => state.isAppointmentOpen);
     const toggleAppointment = useAppointmentStore((state) => state.toggleAppointment);
     const closeAppointment = useAppointmentStore((state) => state.closeAppointment);
+    const triggerRefresh = useAppointmentStore((state) => state.triggerRefresh);
 
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [success, setSuccess] = useState(false);
@@ -31,17 +33,22 @@ const AppointmentSidebar = () => {
         setIsSubmitting(true);
 
         try {
-            const res = await fetch(`${import.meta.env.VITE_API_URL}/appointment`, {
+            const userId = localStorage.getItem("healthcare_user_id");
+            const res = await fetchWithAuth(`${import.meta.env.VITE_API_URL}/appointment`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify(formData)
+                body: JSON.stringify({
+                    ...formData,
+                    user_id: userId // Linking the appointment to the logged-in user
+                })
             });
 
             if (res.status === 201) {
                 alert("Appointment booked successfully");
                 setSuccess(true);
+                triggerRefresh(); // Notify the dashboard to re-fetch data
                 
                 // Clear form and close after delay
                 setTimeout(() => {
