@@ -20,6 +20,7 @@ import PaymentSuccess from './Pages/PaymentSuccess'
 import Newsblog from './Component/Blog/Newsblog'
 import OnlineConsultation from './Pages/OnlineConsultation'
 import Consultation from './Pages/Consultation'
+import Onboarding from './Pages/onboarding'
 import "./App.css"
 
 const App = () => {
@@ -56,6 +57,7 @@ const App = () => {
           <Route path='/shop' element={<Shop />} />
           <Route element={<Auth2 />}>
             <Route path='/dashboard' element={<Dashboard setIsAuthenticated={setIsAuthenticated} />} />
+            <Route path='/onboarding' element={<Onboarding />} />
           </Route>
         </Route>
         <Route path='/payment-success' element={<PaymentSuccess />} />

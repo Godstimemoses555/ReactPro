@@ -38,7 +38,7 @@ const Otpsec = ({ setIsAuthenticated }) => {
             if (response.status === 200) {
                 console.log("OTP verified successfully");
                 setIsAuthenticated(true);
-                navigate("/Shop");
+                navigate("/onboarding");
             } else {
                 setError(data.message || "Invalid OTP code");
             }
