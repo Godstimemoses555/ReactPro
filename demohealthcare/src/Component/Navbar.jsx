@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import logo from '../assets/ciyacarelogo.svg'
 import { Menu, X, Bell, ChevronDown, ShoppingBag } from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom';
