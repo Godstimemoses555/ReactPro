@@ -3,7 +3,7 @@ import { Navigate, Outlet } from 'react-router-dom'
 
 const ProtectedRoute = ({ isAuthenticated }) => {
   if (!isAuthenticated) {
-    return <Navigate to="/Register" replace />
+    return <Navigate to="/Login" replace />
   }
 
   return <Outlet />

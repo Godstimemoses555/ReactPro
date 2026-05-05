@@ -104,11 +104,11 @@ const Regisec1 = () => {
                                         name="password"
                                         value={formData.password}
                                         onChange={handleChange}
-                                        type={showPassword ? "password" : "text"}
+                                        type={showPassword ? "text" : "password"}
                                         className='w-full px-4 py-2 border border-[#37CBD1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#37CBD1]'
                                     />
                                     <div className='absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer text-[#37CBD1]' onClick={() => setShowPassword(!showPassword)}>
-                                        {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                                        {showPassword ? <Eye size={20} /> : <EyeOff size={20} />}
                                     </div>
                                 </div>
                             </div>
@@ -129,11 +129,11 @@ const Regisec1 = () => {
                                         name="confirmPassword"
                                         value={formData.confirmPassword}
                                         onChange={handleChange}
-                                        type={showConfirmPassword ? "password" : "text"}
+                                        type={showConfirmPassword ? "text" : "password"}
                                         className='w-full px-4 py-2 border border-[#37CBD1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#37CBD1]'
                                     />
                                     <div className='absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer text-[#37CBD1]' onClick={() => setShowConfirmPassword(!showConfirmPassword)}>
-                                        {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                                        {showConfirmPassword ? <Eye size={20} /> : <EyeOff size={20} />}
                                     </div>
                                 </div>
                             </div>

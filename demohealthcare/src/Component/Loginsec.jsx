@@ -79,7 +79,7 @@ const Loginsec = () => {
                         <div className='space-y-2'>
                             <label htmlFor="password" className="block text-gray-700">Password</label>
                             <input
-                                type={showPassword ? "password" : "text"}
+                                type={showPassword ? "text" : "password"}
                                 id="password"
                                 value={password}
                                 onChange={handlepassword}
@@ -90,9 +90,9 @@ const Loginsec = () => {
                             <div className='flex absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer text-[#37CBD1]'>
                                 {
                                     showPassword ? (
-                                        <EyeOff size={20} onClick={() => setShowPassword(false)} />
+                                        <Eye size={20} onClick={() => setShowPassword(false)} />
                                     ) : (
-                                        <Eye size={20} onClick={() => setShowPassword(true)} />
+                                        <EyeOff size={20} onClick={() => setShowPassword(true)} />
                                     )
                                 }
                             </div>

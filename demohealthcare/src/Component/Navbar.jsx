@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
+import { AnimatePresence } from 'framer-motion'
 import logo from '../assets/ciyacarelogo.svg'
-import { Menu, X, Bell } from 'lucide-react'
+import { Menu, X, Bell, ChevronDown, ShoppingBag } from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom';
 import useCartStore from '../store/useCartStore';
 import useAppointmentStore from '../store/useAppointmentStore';
 import UseBlognews from '../store/Blognews';
 
 const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
-    // State to toggle the mobile menu
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const cartItems = useCartStore((state) => state.cartItems);
     const toggleCart = useCartStore((state) => state.toggleCart);
@@ -15,12 +15,9 @@ const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
     const openblog = UseBlognews((state) => state.openblog);
     const navigate = useNavigate()
 
-    // Derived count for reactivity
     const itemCount = cartItems.reduce((acc, item) => acc + (item.quantity || 1), 0);
 
-    const toggleMobileMenu = () => {
-        setIsMobileMenuOpen(!isMobileMenuOpen);
-    };
+    const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
 
     const handleLogout = () => {
         localStorage.removeItem("healthcare_user_id");
@@ -31,135 +28,140 @@ const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
     };
 
     return (
-        <nav className='w-full h-20 flex justify-between items-center bg-white px-8 shadow-sm border-b border-gray-100 z-50 sticky top-0'>
-            {/* Logo */}
-            <img src={logo} alt="CiyaCare Logo" className="h-10 cursor-pointer" />
-
-            {/* Desktop Navigation Links */}
-            <div className='hidden md:flex space-x-8 text-[#1A2547] font-medium items-center'>
-                <Link to={"/"} className='hover:text-[#37CBD1] transition-colors'>Home</Link>
-                <div className='relative group py-6'>
-                    <Link to={"/"} className='hover:text-[#37CBD1] transition-colors flex items-center'>Services</Link>
-                    {/* Hover Dropdown Menu */}
-                    <div className='absolute top-[70px] -left-6 w-48 bg-white border border-gray-100 shadow-xl rounded-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 flex flex-col py-3 z-50 overflow-hidden'>
-                        <a href="#" className='px-6 py-2 hover:bg-[#f0fafa] hover:text-[#37CBD1] font-medium transition-colors'>Consultations</a>
-                        <a href="#" className='px-6 py-2 hover:bg-[#f0fafa] hover:text-[#37CBD1] font-medium transition-colors'>Diagnostics</a>
-                        <a href="#" className='px-6 py-2 hover:bg-[#f0fafa] hover:text-[#37CBD1] font-medium transition-colors'>Surgeries</a>
-                        <a href="#" className='px-6 py-2 hover:bg-[#f0fafa] hover:text-[#37CBD1] font-medium transition-colors'>Pharmacy</a>
-                    </div>
-                </div>
-                <div className='relative group py-6'>
-                    <a href="Blogs" className='hover:text-[#37CBD1] transition-colors'>Blogs</a>
-                    <div className='absolute top-[70px] -left-6 w-48 bg-white border border-gray-100 shadow-xl rounded-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 flex flex-col py-3 z-50 overflow-hidden'>
-                        <a href="#" className='px-6 py-2 hover:bg-[#f0fafa] hover:text-[#37CBD1] font-medium transition-colors'>News</a>
-                        <a href="#" className='px-6 py-2 hover:bg-[#f0fafa] hover:text-[#37CBD1] font-medium transition-colors'>Legit Blogs</a>
-                        <a href="#" className='px-6 py-2 hover:bg-[#f0fafa] hover:text-[#37CBD1] font-medium transition-colors'>Health Tips</a>
-                    </div>
-
-                </div>
-
-                <Link to="/contact" className='hover:text-[#37CBD1] transition-colors'>Contact</Link>
-                <Link to="/about-us" className='hover:text-[#37cbd1] transition-colors'>About Us</Link>
-                <Link to="/shop" className='hover:text-[#37cbd1] transition-colors'>Shop</Link>
+        <nav className='w-full h-24 flex justify-between items-center bg-white/80 backdrop-blur-md px-6 md:px-12 border-b border-gray-50 z-[100] sticky top-0 transition-all duration-300'>
+            {/* Logo Section */}
+            <div className='flex items-center gap-2 cursor-pointer' onClick={() => navigate('/')}>
+                <img src={logo} alt="CiyaCare Logo" className="h-10 md:h-12 w-auto" />
             </div>
 
-            {/* Desktop Call to Action & Cart */}
-            <div className='hidden md:flex items-center gap-8'>
-                <button
-                    onClick={toggleCart}
-                    className="relative flex items-center gap-2 px-4 py-2 rounded-xl hover:bg-gray-50 transition-colors group"
-                >
-                    <span className="font-bold text-[#1A2547] group-hover:text-[#37CBD1]">Cart</span>
-                    {itemCount > 0 && (
-                        <div className="absolute -top-1 -right-1 w-5 h-5 bg-[#37CBD1] text-white text-[10px] flex items-center justify-center rounded-full font-bold shadow-lg shadow-[#37CBD1]/30">
-                            {itemCount}
+            {/* Desktop Navigation */}
+            <div className='hidden lg:flex items-center gap-10 text-[#1A2547] font-bold text-sm tracking-tight'>
+                <Link to="/" className='hover:text-[#37CBD1] transition-all relative group py-2'>
+                    Home
+                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#37CBD1] transition-all group-hover:w-full"></span>
+                </Link>
+                
+                {/* Services Dropdown */}
+                <div className='relative group py-2 cursor-pointer'>
+                    <div className='flex items-center gap-1 group-hover:text-[#37CBD1] transition-colors'>
+                        Services <ChevronDown size={14} className="group-hover:rotate-180 transition-transform duration-300" />
+                    </div>
+                    <div className='absolute top-full left-1/2 -translate-x-1/2 mt-2 w-52 bg-white border border-gray-100 shadow-2xl rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 py-3 z-[110]'>
+                        <Link to="/consultation-room" className='px-6 py-2.5 hover:bg-[#37CBD1]/5 hover:text-[#37CBD1] block'>Virtual Room</Link>
+                        <Link to="/" className='px-6 py-2.5 hover:bg-[#37CBD1]/5 hover:text-[#37CBD1] block'>Diagnostics</Link>
+                        <Link to="/" className='px-6 py-2.5 hover:bg-[#37CBD1]/5 hover:text-[#37CBD1] block'>Surgeries</Link>
+                        <Link to="/" className='px-6 py-2.5 hover:bg-[#37CBD1]/5 hover:text-[#37CBD1] block'>Pharmacy</Link>
+                    </div>
+                </div>
+
+                {/* Consultations Dropdown */}
+                <div className='relative group py-2 cursor-pointer'>
+                    <div className='flex items-center gap-1 group-hover:text-[#37CBD1] transition-colors'>
+                        Consultations <ChevronDown size={14} className="group-hover:rotate-180 transition-transform duration-300" />
+                    </div>
+                    <div className='absolute top-full left-1/2 -translate-x-1/2 mt-2 w-64 bg-white border border-gray-100 shadow-2xl rounded-3xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 py-4 z-[110] overflow-hidden'>
+                        <div className="px-6 pb-2 mb-2 border-b border-gray-50">
+                            <p className="text-[10px] text-gray-400 uppercase tracking-widest font-black">Patient Care</p>
                         </div>
+                        <Link to="/consultation" className='px-6 py-3 hover:bg-[#37CBD1]/5 hover:text-[#37CBD1] flex flex-col'>
+                            <span className="text-sm">Schedule Meeting</span>
+                            <span className="text-[10px] text-gray-400 font-medium">Book a professional slot</span>
+                        </Link>
+                        <Link to="/consultation-room" className='px-6 py-3 hover:bg-[#37CBD1]/5 hover:text-[#37CBD1] flex flex-col'>
+                            <span className="text-sm">Enter Virtual Room</span>
+                            <span className="text-[10px] text-gray-400 font-medium">Live video consultation</span>
+                        </Link>
+                    </div>
+                </div>
+
+                <Link to="/blogs" className='hover:text-[#37CBD1] transition-all relative group py-2'>Blogs</Link>
+                <Link to="/shop" className='hover:text-[#37CBD1] transition-all relative group py-2'>Shop</Link>
+                <Link to="/about-us" className='hover:text-[#37CBD1] transition-all relative group py-2'>About</Link>
+            </div>
+
+            {/* Actions Section */}
+            <div className='hidden lg:flex items-center gap-6'>
+                {/* Cart Icon */}
+                <button onClick={toggleCart} className="relative p-2.5 text-[#1A2547] hover:text-[#37CBD1] transition-colors bg-gray-50 rounded-xl group">
+                    <ShoppingBag size={20} />
+                    {itemCount > 0 && (
+                        <span className="absolute -top-1 -right-1 w-5 h-5 bg-[#37CBD1] text-white text-[10px] font-black flex items-center justify-center rounded-full border-2 border-white shadow-lg">
+                            {itemCount}
+                        </span>
                     )}
                 </button>
 
+                {/* Notifications */}
+                <button onClick={openblog} className="relative p-2.5 text-[#1A2547] hover:text-[#37CBD1] transition-colors bg-gray-50 rounded-xl">
+                    <Bell size={20} />
+                    <span className="absolute top-2.5 right-2.5 w-2 h-2 bg-red-500 rounded-full border-2 border-white"></span>
+                </button>
+
+                {/* Auth Button */}
                 <button
-                    onClick={() => navigate(isAuthenticated ? "/dashboard" : "/Register")}
-                    className='flex w-[130px] items-center justify-center h-[40px] bg-white rounded-full shadow-lg border border-gray-100 hover:border-[#37CBD1] transition-all group overflow-hidden relative'
+                    onClick={() => navigate(isAuthenticated ? "/dashboard" : "/Login")}
+                    className='px-6 h-12 rounded-2xl font-black text-sm transition-all relative overflow-hidden group border border-[#1A2547]/10 hover:border-[#37CBD1] text-[#1A2547] hover:text-white'
                 >
-                    <span className='text-[#37CBD1] font-bold text-[15px] relative z-10 group-hover:text-white transition-colors duration-300'>
-                        {isAuthenticated ? 'Dashboard' : 'Sign In'}
-                    </span>
+                    <span className='relative z-10'>{isAuthenticated ? 'Dashboard' : 'Sign In'}</span>
                     <div className='absolute inset-0 bg-[#37CBD1] translate-y-full group-hover:translate-y-0 transition-transform duration-300'></div>
                 </button>
-                <button
-                    onClick={openblog}
-                    className="relative p-2 rounded-xl hover:bg-gray-50 transition-colors group"
-                >
-                    <Bell className="w-6 h-6 text-[#1A2547] group-hover:text-[#37CBD1]" />
-                    <div className="absolute top-1 right-1 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-white shadow-sm shadow-red-500/20"></div>
-                </button>
+
+                {/* Main CTA */}
                 <button
                     onClick={toggleAppointment}
-                    className='bg-[#37CBD1] text-white px-6 py-2.5 rounded-full font-medium hover:bg-[#2ca6ac] transition-colors shadow-sm'
+                    className='bg-[#37CBD1] text-white px-8 h-12 rounded-2xl font-black text-sm hover:bg-[#1A2547] transition-all shadow-xl shadow-[#37CBD1]/20 hover:shadow-[#1A2547]/20 active:scale-95'
                 >
                     Book Appointment
                 </button>
             </div>
 
-            {/* Mobile Hamburger Icon */}
-            <div className='md:hidden flex items-center'>
-                <button onClick={openblog} className='text-[#1A2547] focus:outline-none mr-4 relative'>
-                    <Bell size={24} />
-                    <div className="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full border-2 border-white"></div>
+            {/* Mobile Controls */}
+            <div className='lg:hidden flex items-center gap-4'>
+                <button onClick={toggleCart} className="relative p-2 text-[#1A2547]">
+                    <ShoppingBag size={24} />
+                    {itemCount > 0 && (
+                        <span className="absolute -top-1 -right-1 w-5 h-5 bg-[#37CBD1] text-white text-[10px] font-black flex items-center justify-center rounded-full border-2 border-white">
+                            {itemCount}
+                        </span>
+                    )}
                 </button>
-                <button onClick={toggleMobileMenu} className='text-[#1A2547] focus:outline-none'>
+                <button onClick={toggleMobileMenu} className='text-[#1A2547] p-1 bg-gray-50 rounded-lg'>
                     {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
                 </button>
             </div>
 
-            {/* Mobile Dropdown Menu */}
-            {isMobileMenuOpen && (
-                <div className='absolute top-20 left-0 w-full bg-white shadow-lg border-b border-gray-100 flex flex-col items-center py-6 space-y-4 md:hidden text-[#1A2547] font-medium'>
-                    <Link to="/" onClick={toggleMobileMenu} className='hover:text-[#37CBD1] transition-colors w-full text-center'>Home</Link>
-                    <Link to="/services" onClick={toggleMobileMenu} className='hover:text-[#37CBD1] transition-colors w-full text-center'>Services</Link>
-                    <Link to="/blogs" onClick={toggleMobileMenu} className='hover:text-[#37CBD1] transition-colors w-full text-center'>Blogs</Link>
-                    <Link to="/contact" onClick={toggleMobileMenu} className='hover:text-[#37CBD1] transition-colors w-full text-center'>Contact</Link>
-                    <Link to="/about-us" onClick={toggleMobileMenu} className='hover:text-[#37cbd1] transition-colors w-full text-center'>About Us</Link>
-                    <Link to="/shop" onClick={toggleMobileMenu} className='hover:text-[#37cbd1] transition-colors w-full text-center font-bold text-[#37CBD1]'>Shop (Items: {itemCount})</Link>
-                    
-                    <button
-                        onClick={() => {
-                            if (isAuthenticated) {
-                                navigate("/dashboard");
-                            } else {
-                                navigate("/Register");
-                            }
-                            toggleMobileMenu();
-                        }}
-                        className='text-[#37CBD1] font-bold py-2'
-                    >
-                        {isAuthenticated ? 'My Dashboard' : 'Login / Register'}
-                    </button>
-
-                    {isAuthenticated && (
-                        <button
-                            onClick={handleLogout}
-                            className='text-red-500 font-bold py-2'
-                        >
-                            Logout
-                        </button>
-                    )}
-
-                    <button
-                        onClick={() => { toggleCart(); toggleMobileMenu(); }}
-                        className='bg-[#37CBD1] text-white px-8 py-3 rounded-full font-medium hover:bg-[#2ca6ac] transition-colors shadow-sm w-11/12'
-                    >
-                        View My Cart
-                    </button>
-                    <button
-                        onClick={() => { toggleAppointment(); toggleMobileMenu(); }}
-                        className='bg-[#1A2547] text-white px-8 py-3 rounded-full font-medium hover:bg-black transition-colors shadow-sm w-11/12'
-                    >
-                        Book Appointment
-                    </button>
-                </div>
-            )}
-
+            {/* Mobile Sidebar/Menu */}
+            <AnimatePresence>
+                {isMobileMenuOpen && (
+                    <div className='fixed inset-0 top-24 bg-white z-[90] lg:hidden flex flex-col p-8 space-y-6 overflow-y-auto animate-in slide-in-from-right duration-300'>
+                        <div className="flex flex-col space-y-4">
+                            <Link to="/" onClick={toggleMobileMenu} className='text-2xl font-black text-[#1A2547]'>Home</Link>
+                            <Link to="/consultation" onClick={toggleMobileMenu} className='text-2xl font-black text-[#1A2547]'>Consultation</Link>
+                            <Link to="/consultation-room" onClick={toggleMobileMenu} className='text-2xl font-black text-[#1A2547]'>Virtual Room</Link>
+                            <Link to="/shop" onClick={toggleMobileMenu} className='text-2xl font-black text-[#1A2547]'>Shop</Link>
+                            <Link to="/about-us" onClick={toggleMobileMenu} className='text-2xl font-black text-[#1A2547]'>About</Link>
+                        </div>
+                        
+                        <div className="pt-8 border-t border-gray-100 flex flex-col gap-4">
+                            <button
+                                onClick={() => { navigate(isAuthenticated ? "/dashboard" : "/Login"); toggleMobileMenu(); }}
+                                className='w-full py-4 bg-gray-50 text-[#1A2547] rounded-2xl font-black'
+                            >
+                                {isAuthenticated ? 'Go to Dashboard' : 'Sign In / Register'}
+                            </button>
+                            <button
+                                onClick={() => { toggleAppointment(); toggleMobileMenu(); }}
+                                className='w-full py-4 bg-[#37CBD1] text-white rounded-2xl font-black shadow-lg shadow-[#37CBD1]/20'
+                            >
+                                Book Appointment
+                            </button>
+                            {isAuthenticated && (
+                                <button onClick={handleLogout} className='text-red-500 font-bold py-2 text-center'>Logout</button>
+                            )}
+                        </div>
+                    </div>
+                )}
+            </AnimatePresence>
         </nav>
     )
 }

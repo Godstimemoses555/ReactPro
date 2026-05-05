@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
-import { CheckCircle2, ChevronRight, Home, LayoutDashboard, ShieldCheck } from 'lucide-react';
+import { CheckCircle2, ChevronRight, Home, LayoutDashboard, ShieldCheck, X } from 'lucide-react';
 
 const PaymentSuccess = () => {
     const [searchParams] = useSearchParams();

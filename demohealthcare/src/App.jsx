@@ -18,6 +18,8 @@ import AppointmentSidebar from './Component/Homcomponents/AppointmentSidebar'
 import Footer from './Component/Footer'
 import PaymentSuccess from './Pages/PaymentSuccess'
 import Newsblog from './Component/Blog/Newsblog'
+import OnlineConsultation from './Pages/OnlineConsultation'
+import Consultation from './Pages/Consultation'
 import "./App.css"
 
 const App = () => {
@@ -45,6 +47,9 @@ const App = () => {
           <Route path='/Login' element={<Login />} />
           <Route path='/Otp' element={<Otp setIsAuthenticated={setIsAuthenticated} />} />
         </Route>
+
+        <Route path='/consultation-room' element={<OnlineConsultation />} />
+        <Route path='/consultation' element={<Consultation />} />
 
         {/* PROTECTED ROUTES */}
         <Route element={<ProtectedRoute isAuthenticated={isAuthenticated} />}>
