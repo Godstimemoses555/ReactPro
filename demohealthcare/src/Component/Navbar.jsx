@@ -138,15 +138,36 @@ const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
                         transition={{ type: 'spring', damping: 25, stiffness: 200 }}
                         className='fixed inset-0 top-24 bg-white z-[90] lg:hidden flex flex-col p-8 space-y-6 overflow-y-auto'
                     >
-                        <div className="flex flex-col space-y-4">
-                            <Link to="/" onClick={toggleMobileMenu} className='text-2xl font-black text-[#1A2547]'>Home</Link>
-                            <Link to="/consultation" onClick={toggleMobileMenu} className='text-2xl font-black text-[#1A2547]'>Consultation</Link>
-                            <Link to="/consultation-room" onClick={toggleMobileMenu} className='text-2xl font-black text-[#1A2547]'>Virtual Room</Link>
-                            <Link to="/shop" onClick={toggleMobileMenu} className='text-2xl font-black text-[#1A2547]'>Shop</Link>
-                            <Link to="/about-us" onClick={toggleMobileMenu} className='text-2xl font-black text-[#1A2547]'>About</Link>
+                        <div className="flex flex-col space-y-6">
+                            <div className="flex flex-col space-y-3">
+                                <p className="text-[10px] text-gray-400 uppercase tracking-widest font-black">Main Menu</p>
+                                <Link to="/" onClick={toggleMobileMenu} className='text-2xl font-black text-[#1A2547]'>Home</Link>
+                                <Link to="/services" onClick={toggleMobileMenu} className='text-2xl font-black text-[#1A2547]'>Services</Link>
+                                <Link to="/blogs" onClick={toggleMobileMenu} className='text-2xl font-black text-[#1A2547]'>Blogs</Link>
+                                <Link to="/shop" onClick={toggleMobileMenu} className='text-2xl font-black text-[#1A2547]'>Shop</Link>
+                            </div>
+
+                            <div className="flex flex-col space-y-3">
+                                <p className="text-[10px] text-gray-400 uppercase tracking-widest font-black">Patient Care</p>
+                                <Link to="/consultation" onClick={toggleMobileMenu} className='text-2xl font-black text-[#1A2547]'>Consultation</Link>
+                                <Link to="/consultation-room" onClick={toggleMobileMenu} className='text-2xl font-black text-[#1A2547]'>Virtual Room</Link>
+                            </div>
+
+                            <div className="flex flex-col space-y-3">
+                                <p className="text-[10px] text-gray-400 uppercase tracking-widest font-black">Information</p>
+                                <Link to="/about-us" onClick={toggleMobileMenu} className='text-2xl font-black text-[#1A2547]'>About Us</Link>
+                                <Link to="/contact" onClick={toggleMobileMenu} className='text-2xl font-black text-[#1A2547]'>Contact</Link>
+                            </div>
                         </div>
                         
-                        <div className="pt-8 border-t border-gray-100 flex flex-col gap-4">
+                        <div className="pt-8 border-t border-gray-100 flex flex-col gap-4 pb-12">
+                            <button
+                                onClick={() => { toggleCart(); toggleMobileMenu(); }}
+                                className='w-full py-4 bg-gray-50 text-[#1A2547] rounded-2xl font-black flex items-center justify-center gap-3'
+                            >
+                                <ShoppingBag size={20} />
+                                View Cart ({itemCount})
+                            </button>
                             <button
                                 onClick={() => { navigate(isAuthenticated ? "/dashboard" : "/Login"); toggleMobileMenu(); }}
                                 className='w-full py-4 bg-gray-50 text-[#1A2547] rounded-2xl font-black'
