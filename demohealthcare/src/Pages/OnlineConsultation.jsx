@@ -82,19 +82,19 @@ const OnlineConsultation = () => {
                         className="lg:col-span-2 space-y-6"
                     >
                         {/* Video Interface Mock/Join Card */}
-                        <div className="bg-[#1A2547] rounded-[32px] overflow-hidden aspect-video relative group shadow-2xl shadow-[#1A2547]/20">
+                        <div className="bg-[#1A2547] rounded-[32px] overflow-hidden aspect-square md:aspect-video relative group shadow-2xl shadow-[#1A2547]/20">
                             <img
                                 src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80&w=1200"
                                 alt="Consultation Background"
                                 className="w-full h-full object-cover opacity-40 group-hover:scale-105 transition-transform duration-700"
                             />
 
-                            <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center bg-gradient-to-t from-[#1A2547] via-transparent to-transparent">
-                                <div className="w-20 h-20 bg-[#37CBD1] rounded-full flex items-center justify-center text-white mb-6 animate-bounce shadow-xl shadow-[#37CBD1]/30">
-                                    <Video size={40} />
+                            <div className="absolute inset-0 flex flex-col items-center justify-center p-6 md:p-8 text-center bg-gradient-to-t from-[#1A2547] via-transparent to-transparent">
+                                <div className="w-16 h-16 md:w-20 md:h-20 bg-[#37CBD1] rounded-full flex items-center justify-center text-white mb-4 md:mb-6 animate-bounce shadow-xl shadow-[#37CBD1]/30">
+                                    <Video size={32} className="md:w-10 md:h-10" />
                                 </div>
                                 <h2 className="text-2xl md:text-3xl font-black text-white mb-4">Your Surgeon is Ready</h2>
-                                <p className="text-gray-300 max-w-md mb-8 font-medium">
+                                <p className="text-gray-300 max-w-md mb-6 md:mb-8 font-medium text-sm md:text-base">
                                     Click the button below to launch the secure Google Meet session with {surgeon.name}.
                                 </p>
 
@@ -220,9 +220,9 @@ const OnlineConsultation = () => {
                                 <div className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-[#37CBD1] transition-colors">
                                     <MessageSquare size={18} />
                                 </div>
-                                <input 
-                                    type="text" 
-                                    placeholder="Add a quick note for the doctor..." 
+                                <input
+                                    type="text"
+                                    placeholder="Add a quick note for the doctor..."
                                     className="w-full pl-12 pr-4 py-4 bg-gray-50 border-2 border-transparent focus:border-[#37CBD1] focus:bg-white rounded-2xl outline-none transition-all font-bold text-[#1A2547] placeholder:text-gray-300 text-sm shadow-sm"
                                 />
                             </div>
