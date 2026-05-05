@@ -130,10 +130,15 @@ const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
                 </button>
             </div>
 
-            {/* Mobile Sidebar/Menu */}
             <AnimatePresence>
                 {isMobileMenuOpen && (
-                    <div className='fixed inset-0 top-24 bg-white z-[90] lg:hidden flex flex-col p-8 space-y-6 overflow-y-auto animate-in slide-in-from-right duration-300'>
+                    <motion.div 
+                        initial={{ opacity: 0, x: '100%' }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: '100%' }}
+                        transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+                        className='fixed inset-0 top-24 bg-white z-[90] lg:hidden flex flex-col p-8 space-y-6 overflow-y-auto'
+                    >
                         <div className="flex flex-col space-y-4">
                             <Link to="/" onClick={toggleMobileMenu} className='text-2xl font-black text-[#1A2547]'>Home</Link>
                             <Link to="/consultation" onClick={toggleMobileMenu} className='text-2xl font-black text-[#1A2547]'>Consultation</Link>
@@ -159,7 +164,7 @@ const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
                                 <button onClick={handleLogout} className='text-red-500 font-bold py-2 text-center'>Logout</button>
                             )}
                         </div>
-                    </div>
+                    </motion.div>
                 )}
             </AnimatePresence>
         </nav>
