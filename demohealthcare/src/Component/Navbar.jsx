@@ -47,10 +47,9 @@ const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
                         Services <ChevronDown size={14} className="group-hover:rotate-180 transition-transform duration-300" />
                     </div>
                     <div className='absolute top-full left-1/2 -translate-x-1/2 mt-2 w-52 bg-white border border-gray-100 shadow-2xl rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 py-3 z-[110]'>
+                        <Link to="/services" className='px-6 py-2.5 hover:bg-[#37CBD1]/5 hover:text-[#37CBD1] block'>Medical Services</Link>
+                        <Link to="/consultation" className='px-6 py-2.5 hover:bg-[#37CBD1]/5 hover:text-[#37CBD1] block'>Booking Dashboard</Link>
                         <Link to="/consultation-room" className='px-6 py-2.5 hover:bg-[#37CBD1]/5 hover:text-[#37CBD1] block'>Virtual Room</Link>
-                        <Link to="/" className='px-6 py-2.5 hover:bg-[#37CBD1]/5 hover:text-[#37CBD1] block'>Diagnostics</Link>
-                        <Link to="/" className='px-6 py-2.5 hover:bg-[#37CBD1]/5 hover:text-[#37CBD1] block'>Surgeries</Link>
-                        <Link to="/" className='px-6 py-2.5 hover:bg-[#37CBD1]/5 hover:text-[#37CBD1] block'>Pharmacy</Link>
                     </div>
                 </div>
 

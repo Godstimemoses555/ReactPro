@@ -21,6 +21,7 @@ import Newsblog from './Component/Blog/Newsblog'
 import OnlineConsultation from './Pages/OnlineConsultation'
 import Consultation from './Pages/Consultation'
 import Onboarding from './Pages/onboarding'
+import Services from './Pages/Services'
 import "./App.css"
 
 const App = () => {
@@ -39,6 +40,7 @@ const App = () => {
         <Route path='/' element={<Home />} />
         <Route path='/contact' element={<Contact />} />
         <Route path='/blogs' element={<Blogs />} />
+        <Route path='/services' element={<Services />} />
         <Route path='/about-us' element={<AboutUs />} />
 
 
