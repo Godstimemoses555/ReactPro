@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { X } from 'lucide-react';
 import useCartStore from '../../store/useCartStore';
 
 const CartSidebar = () => {
@@ -74,13 +75,13 @@ const CartSidebar = () => {
         <>
             {/* Overlay */}
             <div 
-                className={`fixed inset-0 bg-black/60 backdrop-blur-sm z-99 transition-all duration-500 ${isCartOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}
+                className={`fixed inset-0 bg-black/60 backdrop-blur-sm z-[990] transition-all duration-500 ${isCartOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}
                 onClick={toggleCart}
             ></div>
 
             {/* Sidebar */}
             <div 
-                className={`fixed top-0 right-0 h-full w-full max-w-[450px] bg-white z-100 shadow-[-20px_0_60px_-15px_rgba(0,0,0,0.2)] transition-transform duration-700 ease-out transform ${isCartOpen ? 'translate-x-0' : 'translate-x-full'}`}
+                className={`fixed top-0 right-0 h-full w-full max-w-[450px] bg-white z-[999] shadow-[-20px_0_60px_-15px_rgba(0,0,0,0.2)] transition-transform duration-700 ease-out transform ${isCartOpen ? 'translate-x-0' : 'translate-x-full'}`}
             >
                 <div className="flex flex-col h-full bg-[#f8fbff]">
                     
@@ -96,9 +97,9 @@ const CartSidebar = () => {
                         </div>
                         <button 
                             onClick={toggleCart}
-                            className="w-12 h-12 rounded-2xl bg-gray-50 flex items-center justify-center text-gray-400 hover:bg-[#37CBD1] hover:text-white transition-all transform hover:rotate-90 duration-500"
+                            className="w-10 h-10 rounded-xl bg-red-50 flex items-center justify-center text-red-500 hover:bg-red-500 hover:text-white transition-all transform hover:rotate-90 duration-300"
                         >
-                             ✕
+                             <X size={20} />
                         </button>
                     </div>
 

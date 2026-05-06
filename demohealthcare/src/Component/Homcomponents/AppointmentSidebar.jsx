@@ -79,13 +79,13 @@ const AppointmentSidebar = () => {
         <>
             {/* Overlay */}
             <div
-                className={`fixed inset-0 bg-[#1A2547]/40 backdrop-blur-md z-[60] transition-all duration-500 ease-in-out ${isAppointmentOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}
+                className={`fixed inset-0 bg-[#1A2547]/40 backdrop-blur-md z-[990] transition-all duration-500 ease-in-out ${isAppointmentOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}
                 onClick={closeAppointment}
             ></div>
 
             {/* Sidebar */}
             <div
-                className={`fixed top-0 right-0 h-full w-full max-w-[500px] bg-white z-[70] shadow-[-20px_0_60px_-15px_rgba(26,37,71,0.15)] transition-transform duration-700 ease-out transform ${isAppointmentOpen ? 'translate-x-0' : 'translate-x-full'}`}
+                className={`fixed top-0 right-0 h-full w-full max-w-[500px] bg-white z-[999] shadow-[-20px_0_60px_-15px_rgba(26,37,71,0.15)] transition-transform duration-700 ease-out transform ${isAppointmentOpen ? 'translate-x-0' : 'translate-x-full'}`}
             >
                 <div className="flex flex-col h-full overflow-hidden relative">
 
@@ -108,9 +108,9 @@ const AppointmentSidebar = () => {
                         </div>
                         <button
                             onClick={closeAppointment}
-                            className="w-12 h-12 rounded-2xl bg-gray-50 flex items-center justify-center text-[#1A2547] hover:bg-[#37CBD1] hover:text-white transition-all transform hover:rotate-90 duration-500 shadow-sm"
+                            className="w-10 h-10 rounded-xl bg-red-50 flex items-center justify-center text-red-500 hover:bg-red-500 hover:text-white transition-all transform hover:rotate-90 duration-300 shadow-sm"
                         >
-                            <X size={24} />
+                            <X size={20} />
                         </button>
                     </div>
 
