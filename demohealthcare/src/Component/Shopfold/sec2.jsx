@@ -50,7 +50,7 @@ const Sec2 = () => {
                         {/* Floating Cart Button */}
                         <button 
                             onClick={toggleCart}
-                            className="relative py-3 px-6 w-full md:w-auto md:p-4 bg-white border border-gray-100 rounded-2xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all text-[#1A2547] group"
+                            className="relative py-3 px-6 md:p-4 bg-white border border-gray-100 rounded-2xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all text-[#1A2547] group self-start md:self-auto"
                         >
                             <span className="font-bold text-sm">My Cart</span>
                             {itemCount > 0 && (
