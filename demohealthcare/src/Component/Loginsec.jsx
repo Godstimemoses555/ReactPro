@@ -54,10 +54,10 @@ const Loginsec = () => {
     }
 
     return (
-        <div className='flex w-screen h-screen min-w-full min-h-full bg-[#37CBD1] items-center justify-center flex-col gap-3'>
-            <h1 className='text-white text-4xl font-bold'>Input Your Data</h1>
-            <div className='w-[50%] h-[70%] bg-white rounded-xl shadow-lg p-8 items-center justify-center flex flex-col gap-3'>
-                <div className='flex w-[300px] items-center justify-center'>
+        <div className='flex w-screen h-screen min-w-full min-h-full bg-[#37CBD1] items-center justify-center flex-col gap-3 px-4'>
+            <h1 className='text-white text-3xl md:text-4xl font-bold text-center'>Input Your Data</h1>
+            <div className='w-full sm:w-[80%] md:w-[50%] max-w-md h-auto min-h-[400px] bg-white rounded-xl shadow-lg p-6 md:p-8 items-center justify-center flex flex-col gap-3'>
+                <div className='flex w-full items-center justify-center text-center'>
                     <h1 className='font-bold text-[#37CBD1] text-[18px]'>Login into Your Account</h1>
                 </div>
 
@@ -78,23 +78,25 @@ const Loginsec = () => {
                         </div>
                         <div className='space-y-2'>
                             <label htmlFor="password" className="block text-gray-700">Password</label>
-                            <input
-                                type={showPassword ? "text" : "password"}
-                                id="password"
-                                value={password}
-                                onChange={handlepassword}
-                                className='w-full px-4 py-2 border border-[#37CBD1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#37CBD1]'
-                                required
-                            />
+                            <div className="relative">
+                                <input
+                                    type={showPassword ? "text" : "password"}
+                                    id="password"
+                                    value={password}
+                                    onChange={handlepassword}
+                                    className='w-full px-4 py-2 border border-[#37CBD1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#37CBD1] pr-10'
+                                    required
+                                />
 
-                            <div className='flex absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer text-[#37CBD1]'>
-                                {
-                                    showPassword ? (
-                                        <Eye size={20} onClick={() => setShowPassword(false)} />
-                                    ) : (
-                                        <EyeOff size={20} onClick={() => setShowPassword(true)} />
-                                    )
-                                }
+                                <div className='absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer text-[#37CBD1] flex items-center justify-center'>
+                                    {
+                                        showPassword ? (
+                                            <Eye size={20} onClick={() => setShowPassword(false)} />
+                                        ) : (
+                                            <EyeOff size={20} onClick={() => setShowPassword(true)} />
+                                        )
+                                    }
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -33,14 +33,14 @@ const Sec2 = () => {
                         <p className="text-gray-500 mt-2">Quality diagnostic tools and wellness essentials.</p>
                     </div>
                     
-                    <div className="flex flex-col lg:flex-row items-center gap-4 w-full md:w-auto">
+                    <div className="flex flex-col md:flex-row items-center gap-4 w-full md:w-auto">
                         {/* Category Filter */}
-                        <div className="flex flex-col md:flex-row w-full md:w-auto bg-white p-1 rounded-xl shadow-sm border border-gray-100">
+                        <div className="flex flex-col md:flex-row bg-white p-1 rounded-xl shadow-sm border border-gray-100 w-full md:w-auto">
                             {["All", "Diagnostics", "Wellness", "Essentials"].map((cat) => (
                                 <button
                                     key={cat}
                                     onClick={() => setFilter(cat)}
-                                    className={`px-6 py-2 rounded-lg text-sm w-full font-bold transition-all ${filter === cat ? 'bg-[#37CBD1] text-white shadow-md' : 'text-gray-500 hover:text-gray-900'}`}
+                                    className={`px-6 py-2 rounded-lg text-sm font-bold transition-all w-full md:w-auto ${filter === cat ? 'bg-[#37CBD1] text-white shadow-md' : 'text-gray-500 hover:text-gray-900'}`}
                                 >
                                     {cat}
                                 </button>
@@ -50,7 +50,7 @@ const Sec2 = () => {
                         {/* Floating Cart Button */}
                         <button 
                             onClick={toggleCart}
-                            className="relative px-6 py-3 md:w-auto bg-white border border-gray-100 rounded-2xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all text-[#1A2547] group self-start sm:self-auto"
+                            className="relative py-3 px-6 w-full md:w-auto md:p-4 bg-white border border-gray-100 rounded-2xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all text-[#1A2547] group"
                         >
                             <span className="font-bold text-sm">My Cart</span>
                             {itemCount > 0 && (

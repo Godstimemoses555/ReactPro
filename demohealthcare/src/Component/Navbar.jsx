@@ -19,11 +19,10 @@ const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
 
     const cartItems = useCartStore((state) => state.cartItems);
     const toggleCart = useCartStore((state) => state.toggleCart);
+    const itemCount = useCartStore((state) => state.getItemCount());
     const toggleAppointment = useAppointmentStore((state) => state.toggleAppointment);
     const openblog = UseBlognews((state) => state.openblog);
     const navigate = useNavigate();
-
-    const itemCount = cartItems.reduce((acc, item) => acc + (item.quantity || 1), 0);
 
     const closeMobileMenu = () => {
         setIsMobileMenuOpen(false);
@@ -105,17 +104,18 @@ const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
                         <span className="absolute top-2.5 right-2.5 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-white"></span>
                     </button>
                     
-                    {isAuthenticated ? (
-                        <button onClick={() => navigate("/dashboard")} className='px-5 h-11 rounded-xl font-bold text-sm border border-gray-200 hover:border-[#37CBD1] hover:text-[#37CBD1] transition-colors'>
-                            Dashboard
-                        </button>
-                    ) : (
-                        <button onClick={() => navigate("/Login")} className='px-5 h-11 rounded-xl font-bold text-sm border border-gray-200 hover:border-[#37CBD1] hover:text-[#37CBD1] transition-colors'>
-                            Sign In
-                        </button>
-                    )}
+                    <button
+                        onClick={() => navigate(isAuthenticated ? "/dashboard" : "/Login")}
+                        className='px-6 h-12 rounded-2xl font-black text-sm transition-all relative overflow-hidden group border border-[#1A2547]/10 hover:border-[#37CBD1] text-[#1A2547] hover:text-white'
+                    >
+                        <span className='relative z-10'>{isAuthenticated ? 'Dashboard' : 'Sign In'}</span>
+                        <div className='absolute inset-0 bg-[#37CBD1] translate-y-full group-hover:translate-y-0 transition-transform duration-300'></div>
+                    </button>
                     
-                    <button onClick={toggleAppointment} className='bg-[#37CBD1] text-white px-6 h-11 rounded-xl font-bold text-sm hover:bg-[#1A2547] transition-colors shadow-md'>
+                    <button
+                        onClick={toggleAppointment}
+                        className='bg-[#37CBD1] text-white px-8 h-12 rounded-2xl font-black text-sm hover:bg-[#1A2547] transition-all shadow-xl shadow-[#37CBD1]/20 hover:shadow-[#1A2547]/20 active:scale-95'
+                    >
                         Book Appointment
                     </button>
                 </div>
@@ -209,6 +209,15 @@ const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
                                     <Link to="/shop" onClick={closeMobileMenu} className="flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-cyan-50 hover:text-[#37CBD1] text-[#1A2547] font-bold transition-colors">
                                         <ShoppingCart size={18} /> Shop
                                     </Link>
+                                    
+                                    <button onClick={() => { toggleCart(); closeMobileMenu(); }} className="w-full flex items-center justify-between px-3 py-3 rounded-xl bg-gray-50 hover:bg-cyan-50 hover:text-[#37CBD1] text-[#1A2547] font-bold transition-colors">
+                                        <div className="flex items-center gap-3"><ShoppingBag size={18} /> View Cart</div>
+                                        {itemCount > 0 && (
+                                            <span className="min-w-[24px] h-[24px] px-2 bg-[#37CBD1] text-white text-[11px] font-black rounded-full flex items-center justify-center">
+                                                {itemCount}
+                                            </span>
+                                        )}
+                                    </button>
                                     <Link to="/about-us" onClick={closeMobileMenu} className="flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-cyan-50 hover:text-[#37CBD1] text-[#1A2547] font-bold transition-colors">
                                         <Info size={18} /> About Us
                                     </Link>

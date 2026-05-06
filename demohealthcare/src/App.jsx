@@ -53,10 +53,10 @@ const App = () => {
 
         <Route path='/consultation-room' element={<OnlineConsultation />} />
         <Route path='/consultation' element={<Consultation />} />
+        <Route path='/shop' element={<Shop />} />
 
         {/* PROTECTED ROUTES */}
         <Route element={<ProtectedRoute isAuthenticated={isAuthenticated} />}>
-          <Route path='/shop' element={<Shop />} />
           <Route element={<Auth2 />}>
             <Route path='/dashboard' element={<Dashboard setIsAuthenticated={setIsAuthenticated} />} />
             <Route path='/onboarding' element={<Onboarding />} />
